@@ -1,41 +1,278 @@
+<!-- ============================================ -->
+<!-- index.html - Home page                       -->
+<!-- ============================================ -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Villa Martis Hotel POS</title>
+  <title>Villa Martis · Hotel POS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: linear-gradient(145deg, #f7f3ee 0%, #e8e0d8 100%);
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      margin: 0;
+      color: #1f1c1a;
+    }
+    .app-card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(255, 250, 245, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 56px;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 4px 18px 0 rgba(0,0,0,0.08), inset 0 1px 2px rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,245,235,0.5);
+    }
+    @media (max-width:550px){ .app-card { padding:2rem 1.5rem; border-radius:36px; } }
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3e2c23, #6b4e3e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+    .badge {
+      background: #dfcdbc;
+      color: #2d201a;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 3px rgba(255,235,215,0.8);
+      border: 1px solid rgba(255,240,225,0.6);
+    }
+    .tagline {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #4f3d33;
+      margin-top: 0.15rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid #b2917c;
+      padding-left: 1.2rem;
+      background: rgba(235,215,200,0.2);
+      border-radius: 0 20px 20px 0;
+    }
+    .section { margin: 2.4rem 0 2.8rem 0; }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2d211b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.3px;
+    }
+    .section-title span {
+      background: #b5947e;
+      color: #fcf6f0;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .download-btn-wrap {
+      background: #f0e6dd;
+      border-radius: 80px;
+      padding: 0.6rem 1rem 0.6rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      box-shadow: 0 6px 14px rgba(100,70,50,0.12);
+      border: 1px solid rgba(255,235,215,0.7);
+      backdrop-filter: blur(4px);
+      margin: 0.5rem 0 0.2rem;
+    }
+    .download-btn {
+      background: #2f241e;
+      color: #fef6ef;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: 0.2s;
+      box-shadow: 0 8px 16px -8px rgba(30,20,15,0.3);
+      border: 1px solid #4a352a;
+    }
+    .download-btn:hover { background:#1e1612; transform:scale(1.02); box-shadow:0 12px 24px -10px #2d1e16; }
+    .btn-hint { color:#4d3a2e; font-weight:500; font-size:0.95rem; }
+    .btn-hint small { font-weight:400; opacity:0.75; display:block; font-size:0.8rem; margin-top:2px; }
+    .install-list {
+      list-style: none;
+      counter-reset: step-counter;
+      margin: 1.5rem 0 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .install-list li {
+      counter-increment: step-counter;
+      background: rgba(235,220,208,0.3);
+      backdrop-filter: blur(4px);
+      padding: 0.8rem 1.2rem 0.8rem 3.8rem;
+      border-radius: 60px;
+      position: relative;
+      font-weight: 450;
+      color: #2f241e;
+      border: 1px solid rgba(215,190,175,0.3);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .install-list li::before {
+      content: counter(step-counter);
+      background: #ab8b76;
+      color: #fcf3eb;
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    }
+    .install-list li strong { font-weight:600; color:#35261e; }
+    .install-list li a { color:#5f3f2e; font-weight:600; text-decoration:none; border-bottom:2px solid #ccb5a3; }
+    .install-list li a:hover { border-bottom-color:#7a5b47; color:#2f1d12; }
+    .release-box {
+      background: rgba(225,208,193,0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 1.6rem 2rem;
+      border: 1px solid #dccbbc;
+      box-shadow: inset 0 1px 6px rgba(255,240,225,0.6);
+      margin-top: 0.8rem;
+    }
+    .release-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .release-box ul li {
+      padding-left: 1.8rem;
+      position: relative;
+      font-weight: 400;
+      color: #2d221c;
+    }
+    .release-box ul li::before {
+      content: "✦";
+      color: #926f58;
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      opacity: 0.7;
+    }
+    .dev-credit {
+      background: #dccfc3;
+      border-radius: 60px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-weight: 500;
+      color: #2c1f18;
+      border: 1px solid #e5d3c4;
+      box-shadow: inset 0 1px 4px #f2e3d6;
+    }
+    .dev-credit a { color:#1b120e; font-weight:600; text-decoration:none; border-bottom:2px solid #b5937d; }
+    .dev-credit a:hover { border-bottom-color:#3b281e; }
+    hr { border:0; height:2px; background:linear-gradient(90deg,#dac8b9,#f0e1d4,#dac8b9); margin:1.8rem 0 0.2rem; opacity:0.5; border-radius:20px; }
+    .back-link { margin-top:2rem; display:inline-block; font-weight:500; color:#543f32; text-decoration:none; border-bottom:2px solid #b99b87; padding-bottom:2px; transition:0.2s; }
+    .back-link:hover { color:#1f130d; border-bottom-color:#5f3e2b; }
+    .mt-1 { margin-top:0.8rem; }
+    .text-muted { color:#4b3a2e; font-size:0.9rem; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Villa Martis Hotel POS</h1>
-    <p>A desktop point-of-sale application for Villa Martis Hotel.</p>
-  </header>
+<div class="app-card">
+  <!-- HOME PAGE -->
+  <div class="page-home">
+    <div class="brand">
+      <h1>Villa Martis</h1>
+      <span class="badge">✦ POS v1.0</span>
+    </div>
+    <div class="tagline">Elegant point-of-sale · crafted for hotel operations</div>
 
-  <main>
-    <section>
-      <h2>Get the application</h2>
-      <p><a href="download.html">Download Villa Martis POS for Windows</a></p>
-    </section>
+    <!-- download CTA -->
+    <div class="section">
+      <div class="section-title"><span>⬇</span> Get the application</div>
+      <div class="download-btn-wrap">
+        <span class="btn-hint">Windows · 64-bit <small>setup 1.0.0</small></span>
+        <a href="download.html" class="download-btn"><span style="font-size:1.3rem;line-height:1;">⬇</span> Download .exe</a>
+      </div>
+      <p class="text-muted mt-1">Direct download · installer size ~18 MB</p>
+    </div>
 
-    <section>
-      <h2>Installation guide</h2>
-      <ol>
-        <li>Open the <a href="download.html">download page</a> and download the Villa Martis Hotel POS setup file.</li>
-        <li>When the download is complete, locate <strong>POS Desktop Setup 1.0.0.exe</strong> in your Downloads folder.</li>
-        <li>Double-click the file to start the installer.</li>
-        <li>Follow the installation prompts, then open Villa Martis POS from the Start menu or desktop shortcut.</li>
+    <!-- installation guide -->
+    <div class="section">
+      <div class="section-title"><span>📋</span> Installation guide</div>
+      <ol class="install-list">
+        <li>Open the <a href="download.html">download page</a> and get the <strong>POS Desktop Setup 1.0.0.exe</strong>.</li>
+        <li>Locate the file in your <strong>Downloads</strong> folder.</li>
+        <li>Double‑click the file to start the installer.</li>
+        <li>Follow the prompts, then launch Villa Martis POS from Start or desktop.</li>
       </ol>
-    </section>
+    </div>
 
-    <section>
-      <h2>Release notes - Version 1.0.0</h2>
-      <ul>
-        <li>Initial Windows desktop release of the Villa Martis Hotel POS application.</li>
-        <li>Provides a dedicated point-of-sale setup for hotel operations.</li>
-        <li>Distributed as a simple Windows executable installer.</li>
-        <li> This was developed by Benson contact +254758853681 and Maurice contact +254719500856</li>
-      </ul>
-    </section>
-  </main>
+    <!-- release notes -->
+    <div class="section" style="margin-top:0;">
+      <div class="section-title"><span>📌</span> Release notes · v1.0.0</div>
+      <div class="release-box">
+        <ul>
+          <li>Initial Windows desktop release for Villa Martis Hotel.</li>
+          <li>Dedicated point‑of‑sale setup for hotel operations.</li>
+          <li>Simple Windows executable installer (no dependencies).</li>
+          <li style="list-style:none; margin-top:0.4rem;">
+            <span class="dev-credit">
+              👥️ Developed by <a href="#">Benson</a> +254 758 853 681 &amp; <a href="#">Maurice</a> +254 719 500 856
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p style="text-align:right; font-size:0.85rem; color:#5f4b3b; margin-top:0.8rem;">Villa Martis · hotel POS</p>
+  </div>
+</div>
 </body>
-</html>
+  </html>
