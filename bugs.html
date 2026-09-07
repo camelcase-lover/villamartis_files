@@ -1,0 +1,38 @@
+<section class="bug-item">
+    <h2>Menu and Bar Item Deletion Bug</h2>
+
+    <h3>Problem</h3>
+    <p>
+        Menu items and bar items could not be deleted when they were already
+        associated with existing restaurant or bar orders. The system returned
+        a foreign key constraint error because the order items still referenced
+        the records being deleted.
+    </p>
+
+    <h3>Cause</h3>
+    <p>
+        The <code>restaurant_order_items.menu_id</code> and
+        <code>bar_order_items.item_id</code> foreign keys prevented deletion of
+        menu and bar items that had existing order records.
+    </p>
+
+    <h3>Solution</h3>
+    <p>
+        The foreign key constraints were updated to use
+        <code>ON DELETE SET NULL</code>. The corresponding columns were also
+        changed to allow <code>NULL</code> values, and the Rust models were
+        updated to use <code>Option&lt;Uuid&gt;</code>.
+    </p>
+
+    <h3>Result</h3>
+    <p>
+        The bug was resolved. Menu and bar items can now be deleted without
+        removing historical order records. Existing orders retain the item
+        name, quantity, unit price, and total price while the deleted item's
+        foreign key is set to <code>NULL</code>.
+    </p>
+
+    <p class="bug-status">
+        <strong>Status:</strong> Resolved
+    </p>
+</section>
